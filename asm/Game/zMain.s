@@ -1,9 +1,10 @@
 .include "macros.inc"
 
+.if 0
 .section .text  # 0x800A26A0 - 0x800A6000
 
-.global func_800A26A0
-func_800A26A0:
+.global main
+main:
 /* 800A26A0 0009F4A0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A26A4 0009F4A4  7C 08 02 A6 */	mflr r0
 /* 800A26A8 0009F4A8  3C 60 80 3C */	lis r3, globals@ha
@@ -20,8 +21,8 @@ func_800A26A0:
 /* 800A26D4 0009F4D4  98 04 06 D2 */	stb r0, 0x6d2(r4)
 /* 800A26D8 0009F4D8  48 03 0C 8D */	bl iSystemInit__FUi
 /* 800A26DC 0009F4DC  48 00 01 19 */	bl zMainOutputMgrSetup__Fv
-/* 800A26E0 0009F4E0  3C 60 80 0A */	lis r3, lbl_800A4BB0@ha
-/* 800A26E4 0009F4E4  38 63 4B B0 */	addi r3, r3, lbl_800A4BB0@l
+/* 800A26E0 0009F4E0  3C 60 80 0A */	lis r3, zMainMemLvlChkCB__Fv@ha
+/* 800A26E4 0009F4E4  38 63 4B B0 */	addi r3, r3, zMainMemLvlChkCB__Fv@l
 /* 800A26E8 0009F4E8  4B F9 15 2D */	bl xMemRegisterBaseNotifyFunc__FPFv_v
 /* 800A26EC 0009F4EC  48 00 01 31 */	bl zMainInitGlobals__Fv
 /* 800A26F0 0009F4F0  48 01 B9 31 */	bl var_init__Fv
@@ -40,9 +41,9 @@ func_800A26A0:
 /* 800A2724 0009F524  38 65 D4 94 */	addi r3, r5, lbl_8025D494@l
 /* 800A2728 0009F528  48 03 22 E9 */	bl iFuncProfileParse__FPci
 /* 800A272C 0009F52C  4B FA B5 1D */	bl xUtilStartup__Fv
-/* 800A2730 0009F530  3C 80 80 29 */	lis r4, lbl_8028FB70@ha
+/* 800A2730 0009F530  3C 80 80 29 */	lis r4, g_xser_sizeinfo@ha
 /* 800A2734 0009F534  38 60 00 80 */	li r3, 0x80
-/* 800A2738 0009F538  38 84 FB 70 */	addi r4, r4, lbl_8028FB70@l
+/* 800A2738 0009F538  38 84 FB 70 */	addi r4, r4, g_xser_sizeinfo@l
 /* 800A273C 0009F53C  4B FA 06 31 */	bl xSerialStartup__FiP21st_SERIAL_PERCID_SIZE
 /* 800A2740 0009F540  4B FB 0D A5 */	bl zDispatcher_Startup__Fv
 /* 800A2744 0009F544  4B F9 F1 DD */	bl xScrFxInit__Fv
@@ -144,12 +145,12 @@ zMainParseINIGlobals__FP8xIniFile:
 /* 800A289C 0009F69C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A28A0 0009F6A0  7C 08 02 A6 */	mflr r0
 /* 800A28A4 0009F6A4  3C 80 80 26 */	lis r4, lbl_8025D494@ha
-/* 800A28A8 0009F6A8  3C A0 80 29 */	lis r5, lbl_8028FB70@ha
+/* 800A28A8 0009F6A8  3C A0 80 29 */	lis r5, g_xser_sizeinfo@ha
 /* 800A28AC 0009F6AC  90 01 00 34 */	stw r0, 0x34(r1)
 /* 800A28B0 0009F6B0  38 84 D4 94 */	addi r4, r4, lbl_8025D494@l
 /* 800A28B4 0009F6B4  38 84 00 0B */	addi r4, r4, 0xb
 /* 800A28B8 0009F6B8  BE C1 00 08 */	stmw r22, 8(r1)
-/* 800A28BC 0009F6BC  3B 65 FB 70 */	addi r27, r5, lbl_8028FB70@l
+/* 800A28BC 0009F6BC  3B 65 FB 70 */	addi r27, r5, g_xser_sizeinfo@l
 /* 800A28C0 0009F6C0  7C 7F 1B 78 */	mr r31, r3
 /* 800A28C4 0009F6C4  38 A0 00 20 */	li r5, 0x20
 /* 800A28C8 0009F6C8  4B F8 E2 21 */	bl xIniGetInt__FP8xIniFilePci
@@ -2403,7 +2404,8 @@ lbl_800A3AC0:
 /* 800A4BA4 000A19A4  7C 08 03 A6 */	mtlr r0
 /* 800A4BA8 000A19A8  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A4BAC 000A19AC  4E 80 00 20 */	blr 
-lbl_800A4BB0:
+
+zMainMemLvlChkCB__Fv:
 /* 800A4BB0 000A19B0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A4BB4 000A19B4  7C 08 02 A6 */	mflr r0
 /* 800A4BB8 000A19B8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -3788,16 +3790,21 @@ lbl_800A5F98:
 .global iEnvStartup__Fv
 iEnvStartup__Fv:
 /* 800A5FFC 000A2DFC  4E 80 00 20 */	blr 
+
+.endif
+
 .section .rodata
 lbl_8025D218:
 	.incbin "baserom.dol", 0x25A1F8, 0x10
 lbl_8025D228:
 	.incbin "baserom.dol", 0x25A208, 0x26C
+.global lbl_8025D494
 lbl_8025D494:
 	.incbin "baserom.dol", 0x25A474, 0x10C4
 
 .section .data
-lbl_8028FB70:
+.global g_xser_sizeinfo
+g_xser_sizeinfo:
 	.incbin "baserom.dol", 0x28CB50, 0x1E4
 lbl_8028FD54:
 	.incbin "baserom.dol", 0x28CD34, 0x2C

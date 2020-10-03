@@ -5,4 +5,6 @@
 
 typedef uint64 iTime;
 
+void iFuncProfileParse(char*, int32);
+
 #endif

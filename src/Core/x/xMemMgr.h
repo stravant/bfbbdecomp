@@ -5,15 +5,18 @@
 
 struct xMemPool
 {
-	void* FreeList;
-	uint16 NextOffset;
-	uint16 Flags;
-	void* UsedList;
-	void (*InitCB)(xMemPool*, void*);
-	void* Buffer;
-	uint16 Size;
-	uint16 NumRealloc;
-	uint32 Total;
+    void* FreeList;
+    uint16 NextOffset;
+    uint16 Flags;
+    void* UsedList;
+    void (*InitCB)(xMemPool*, void*);
+    void* Buffer;
+    uint16 Size;
+    uint16 NumRealloc;
+    uint32 Total;
 };
+
+typedef void (*xMemBaseNotifyFunc)();
+void xMemRegisterBaseNotifyFunc(xMemBaseNotifyFunc func);
 
 #endif

@@ -101,6 +101,7 @@ TEXT_O_FILES :=                                     \
     $(OBJ_DIR)/asm/Game/zLightning.o                \
     $(OBJ_DIR)/asm/Game/zLOD.o                      \
     $(OBJ_DIR)/asm/Game/zMain.o                     \
+    $(OBJ_DIR)/src/Game/zMain.o                     \
     $(OBJ_DIR)/asm/Game/zMenu.o                     \
     $(OBJ_DIR)/asm/Game/zMovePoint.o                \
     $(OBJ_DIR)/asm/Game/zMusic.o                    \

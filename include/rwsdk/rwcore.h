@@ -57,19 +57,19 @@ enum RwRenderState
 
 struct RwLLLink
 {
-	RwLLLink* next;
-	RwLLLink* prev;
+    RwLLLink* next;
+    RwLLLink* prev;
 };
 
 struct RwTexture
 {
-	RwRaster* raster;
-	RwTexDictionary* dict;
-	RwLLLink lInDictionary;
-	RwChar name[32];
-	RwChar mask[32];
-	RwUInt32 filterAddressing;
-	RwInt32 refCount;
+    RwRaster* raster;
+    RwTexDictionary* dict;
+    RwLLLink lInDictionary;
+    RwChar name[32];
+    RwChar mask[32];
+    RwUInt32 filterAddressing;
+    RwInt32 refCount;
 };
 
 enum RwFogType
@@ -94,7 +94,7 @@ struct RwCamera
 };
 
 extern "C" {
-    extern RwBool RwRenderStateSet(RwRenderState state, void* value);
+extern RwBool RwRenderStateSet(RwRenderState state, void* value);
 }
 
 #endif
