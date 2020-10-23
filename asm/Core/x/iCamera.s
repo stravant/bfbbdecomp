@@ -50,7 +50,7 @@ iCameraCreate__Fiii:
 /* 800C01DC 000BCFDC  41 82 00 10 */	beq lbl_800C01EC
 /* 800C01E0 000BCFE0  7F E3 FB 78 */	mr r3, r31
 /* 800C01E4 000BCFE4  48 00 F3 C9 */	bl iScrFxCameraCreated__FP8RwCamera
-/* 800C01E8 000BCFE8  93 ED 91 84 */	stw r31, lbl_803CBA84-_SDA_BASE_(r13)
+/* 800C01E8 000BCFE8  93 ED 91 84 */	stw r31, sMainGameCamera-_SDA_BASE_(r13)
 lbl_800C01EC:
 /* 800C01EC 000BCFEC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800C01F0 000BCFF0  7F E3 FB 78 */	mr r3, r31
@@ -78,13 +78,13 @@ iCameraDestroy__FP8RwCamera:
 /* 800C023C 000BD03C  7F C4 F3 78 */	mr r4, r30
 /* 800C0240 000BD040  48 15 ED 09 */	bl RpWorldRemoveCamera
 lbl_800C0244:
-/* 800C0244 000BD044  80 0D 91 84 */	lwz r0, lbl_803CBA84-_SDA_BASE_(r13)
+/* 800C0244 000BD044  80 0D 91 84 */	lwz r0, sMainGameCamera-_SDA_BASE_(r13)
 /* 800C0248 000BD048  7C 1E 00 40 */	cmplw r30, r0
 /* 800C024C 000BD04C  40 82 00 14 */	bne lbl_800C0260
 /* 800C0250 000BD050  7F C3 F3 78 */	mr r3, r30
 /* 800C0254 000BD054  48 00 F5 AD */	bl iScrFxCameraDestroyed__FP8RwCamera
 /* 800C0258 000BD058  38 00 00 00 */	li r0, 0
-/* 800C025C 000BD05C  90 0D 91 84 */	stw r0, lbl_803CBA84-_SDA_BASE_(r13)
+/* 800C025C 000BD05C  90 0D 91 84 */	stw r0, sMainGameCamera-_SDA_BASE_(r13)
 lbl_800C0260:
 /* 800C0260 000BD060  28 1E 00 00 */	cmplwi r30, 0
 /* 800C0264 000BD064  41 82 00 5C */	beq lbl_800C02C0
@@ -836,18 +836,24 @@ lbl_800C0D04:
 .endif
 
 .section .sbss
-lbl_803CBA84:
+.global sMainGameCamera
+sMainGameCamera:
 	.skip 0x4
 
 .section .sdata2
+.global lbl_803CE030
 lbl_803CE030:
 	.incbin "baserom.dol", 0x2B78D0, 0x4
+.global lbl_803CE034
 lbl_803CE034:
 	.incbin "baserom.dol", 0x2B78D4, 0x4
+.global lbl_803CE038
 lbl_803CE038:
 	.incbin "baserom.dol", 0x2B78D8, 0x4
+.global lbl_803CE03C
 lbl_803CE03C:
 	.incbin "baserom.dol", 0x2B78DC, 0x4
+.global lbl_803CE040
 lbl_803CE040:
 	.incbin "baserom.dol", 0x2B78E0, 0x4
 lbl_803CE044:
